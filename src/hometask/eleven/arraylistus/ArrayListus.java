@@ -3,32 +3,49 @@ package hometask.eleven.arraylistus;
 import java.util.Iterator;
 
 /**
- * Created by horsey on 16.02.2016.
+ * Created by Kocherga Vitalii on 16.02.2016.
  */
 
 public class ArrayListus<T> implements Iterable {
+
     private final int STANDARD_CAPACITY = 15;
     private int size = 0;
     private int listusCapacity;
     private T[] objContainer;
 
-
+    /**
+     * Standard constructor
+     */
     public ArrayListus() {
         objContainer = (T[]) new Object[STANDARD_CAPACITY];
         listusCapacity = STANDARD_CAPACITY;
     }
 
+    /**
+     * Constructor with user defined capacity
+     *
+     * @param customCapacity
+     */
     public ArrayListus(int customCapacity) {
         objContainer = (T[]) new Object[customCapacity];
         listusCapacity = customCapacity;
     }
 
+    /**
+     * Adding elements to array in natural order
+     * @param value
+     */
     public void add(T value) {
         objContainer[size] = value;
         size++;
         capacityChecker();
     }
 
+    /**
+     * Adding elements to array on specified position in array
+     * @param index - position for the element
+     * @param value - value of element
+     */
     public void add(int index, T value) {
         try {
             T[] tempArr = (T[]) new Object[listusCapacity + 1];
@@ -49,6 +66,11 @@ public class ArrayListus<T> implements Iterable {
         }
     }
 
+    /**
+     * Setting the value of element on specified position in array
+     * @param index - position of element
+     * @param value
+     */
     public void set(int index, T value) {
         if (index >= 0 && index < size) {
             objContainer[index] = value;
@@ -56,6 +78,11 @@ public class ArrayListus<T> implements Iterable {
             throw new IndexOutOfBoundsException("Out of bound");
         }
     }
+
+    /**
+     * Removing element on specified position from array
+     * @param index - position of element
+     */
 
     public void remove(int index) {
 
@@ -75,14 +102,24 @@ public class ArrayListus<T> implements Iterable {
 
     }
 
+    /**
+     *
+     * Getting the value of element on specified position in array
+     * @param index - element position
+     * @return value of element
+     */
     public T getValue(int index) {
         if (index >= 0 && index < listusCapacity) {
             return objContainer[index];
         } else {
-            throw new IndexOutOfBoundsException("Out of bond");
+            throw new IndexOutOfBoundsException("Out of bound");
         }
     }
 
+    /**
+     * Setting the element of specified value as a first element of array
+     * @param value
+     */
     private void addFirst(T value) {
         T[] tempArr = (T[]) new Object[listusCapacity + 1];
         System.arraycopy(objContainer, 0, tempArr, 1, listusCapacity);
@@ -92,6 +129,10 @@ public class ArrayListus<T> implements Iterable {
         capacityChecker();
     }
 
+    /**
+     * Method is checking if the size of array is close to it's capacity
+     * and increasing it
+     */
     private void capacityChecker() {
         if (size >= listusCapacity - 1) {
             T[] tempArr = (T[]) new Object[listusCapacity + listusCapacity / 2];
@@ -103,10 +144,19 @@ public class ArrayListus<T> implements Iterable {
         }
     }
 
+    /**
+     *
+     * @return the size of list
+     */
+
     public int size() {
         return size;
     }
 
+    /**
+     *
+     * @return capacity of list
+     */
     public int capacity() {
         return listusCapacity;
     }
